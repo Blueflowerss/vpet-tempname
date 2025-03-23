@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://nqq0p7tdi4y5"]
+
+[ext_resource type="PackedScene" uid="uid://do7gg7hroa4mi" path="res://pet.tscn" id="1_n53ga"]
+
+[node name="root" type="Node"]
+
+[node name="Pet" parent="." instance=ExtResource("1_n53ga")]
