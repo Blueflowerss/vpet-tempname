@@ -38,11 +38,14 @@ func _process(delta: float) -> void:
 			move_to_position = grid_position + random_near_spot; 
 			#getting a path to the spot from A* pathfinding thingi
 			path_array = get_parent().astar_grid.get_id_path(grid_position,abs(move_to_position));
+			#clear out the first waypoint, which is the critter's position
+			path_array.pop_front();
 			#time to move
 			current_action = ACT.MOVE;
 		ACT.MOVE:
 			#get the next position at the front
 			var next_position = path_array.pop_front();
+			print(next_position)
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
 			if not next_position:
 				current_action = ACT.IDLE;
