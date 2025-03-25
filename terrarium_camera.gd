@@ -1,6 +1,6 @@
 extends Camera2D
 
-var camera_pan_speed = 20
+var camera_pan_speed = 10
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
