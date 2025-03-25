@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cjl1bs5857s6j" path="res://critter.gd" id="1_ydhak"]
 [ext_resource type="Texture2D" uid="uid://h4nxmt7jh1j1" path="res://graphics/critter1-back.png" id="2_l11x4"]
 [ext_resource type="Texture2D" uid="uid://dcx3um5kqdui8" path="res://graphics/critter1.png" id="3_c2etd"]
-[ext_resource type="Script" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
+[ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydhak"]
 animations = [{
@@ -18,6 +18,21 @@ animations = [{
 "name": &"front+back",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_xts2v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_c2etd"]
 resource_name = "back_idle"
@@ -34,21 +49,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0.865), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_xts2v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_202f7"]
