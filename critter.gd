@@ -30,26 +30,24 @@ func _process(delta: float) -> void:
 	print(current_action)
 	#standing around, checks if needs anything done, otherwise finds a random spot 
 	#to walk to
-	if current_action == ACT.IDLE:
-		#find a random spot near the critter
-		var random_near_spot : Vector2i = Vector2i(randi_range(-5,5),randi_range(-5,5));
-		#setting the random spot to move_to_spot
-		move_to_position = grid_position + random_near_spot; 
-		#getting a path to the spot from A* pathfinding thingi
-		path_array = get_parent().astar_grid.get_id_path(grid_position,move_to_position);
-		#time to move
-		current_action = ACT.MOVE;
-		return
-	elif current_action == ACT.MOVE:
-		#get the next position at the front
-		var next_position = path_array.pop_front();
-		
-		#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
-		if not next_position:
-			current_action = ACT.IDLE;
-		else:
-			print(next_position)
-			grid_position = next_position;
-		return
-	elif current_action == ACT.FUN:
-		return
+	match current_action:
+		ACT.IDLE:
+			#find a random spot near the critter
+			var random_near_spot : Vector2i = Vector2i(randi_range(-5,5),randi_range(-5,5));
+			#setting the random spot to move_to_spot
+			move_to_position = grid_position + random_near_spot; 
+			#getting a path to the spot from A* pathfinding thingi
+			path_array = get_parent().astar_grid.get_id_path(grid_position,abs(move_to_position));
+			#time to move
+			current_action = ACT.MOVE;
+		ACT.MOVE:
+			#get the next position at the front
+			var next_position = path_array.pop_front();
+			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
+			if not next_position:
+				current_action = ACT.IDLE;
+			else:
+				print(next_position)
+				grid_position = next_position;
+		ACT.FUN:
+			pass
