@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="vpet"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+run/main_scene="uid://nqq0p7tdi4y5"
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://global.gd"
 
 [rendering]
 

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cta1bd11q6cjx"]
+
+[ext_resource type="Script" uid="uid://cp0gutj6ktv0i" path="res://terrarium_scene.gd" id="1_8xau6"]
+[ext_resource type="PackedScene" uid="uid://do7gg7hroa4mi" path="res://critter.tscn" id="1_xv457"]
+[ext_resource type="Script" uid="uid://1py08i846qhw" path="res://terrarium_camera.gd" id="3_dygky"]
+
+[node name="terrarium" type="Node2D"]
+script = ExtResource("1_8xau6")
+
+[node name="Critter" parent="." instance=ExtResource("1_xv457")]
+
+[node name="terrarium_camera" type="Camera2D" parent="."]
+script = ExtResource("3_dygky")
