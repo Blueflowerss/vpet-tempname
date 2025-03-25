@@ -9,5 +9,7 @@ script = ExtResource("1_8xau6")
 
 [node name="Critter" parent="." instance=ExtResource("1_xv457")]
 
-[node name="terrarium_camera" type="Camera2D" parent="."]
+[node name="terrarium_camera" type="Camera2D" parent="Critter"]
+scale = Vector2(0.618498, 0.355704)
+zoom = Vector2(2.135, 2.135)
 script = ExtResource("3_dygky")
