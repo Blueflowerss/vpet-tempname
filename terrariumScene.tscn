@@ -1,15 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://cta1bd11q6cjx"]
+[gd_scene load_steps=5 format=3 uid="uid://cta1bd11q6cjx"]
 
 [ext_resource type="Script" uid="uid://cp0gutj6ktv0i" path="res://terrarium_scene.gd" id="1_8xau6"]
 [ext_resource type="PackedScene" uid="uid://do7gg7hroa4mi" path="res://critter.tscn" id="1_xv457"]
 [ext_resource type="Script" uid="uid://1py08i846qhw" path="res://terrarium_camera.gd" id="3_dygky"]
+[ext_resource type="PackedScene" uid="uid://blnfiruyo4s28" path="res://addons/grid_display/grid_display_scene.tscn" id="4_5q3ku"]
 
 [node name="terrarium" type="Node2D"]
 script = ExtResource("1_8xau6")
 
 [node name="Critter" parent="." instance=ExtResource("1_xv457")]
+position = Vector2(32, 31)
 
-[node name="terrarium_camera" type="Camera2D" parent="Critter"]
+[node name="terrarium_camera" type="Camera2D" parent="."]
+position = Vector2(662, 378)
 scale = Vector2(0.618498, 0.355704)
-zoom = Vector2(2.135, 2.135)
+zoom = Vector2(0.75, 0.75)
 script = ExtResource("3_dygky")
+
+[node name="GridDisplayScene" parent="." instance=ExtResource("4_5q3ku")]
+grid_size = Vector2(32, 32)
+line_size = Vector2(2, 2)
+border_width = 1.0

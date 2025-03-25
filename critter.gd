@@ -14,12 +14,12 @@ enum ACT {
 }
 #setting up initial values
 func _ready() -> void:
-	grid_position = Vector2i(32,32);
+	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
 	current_action = ACT.IDLE;
 func _physics_process(delta: float) -> void:
 	#decided to do animation here
-	position = grid_position * 16;
+	position = (grid_position * 64) + Vector2i(32,32);
 	pass
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
