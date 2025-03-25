@@ -1,7 +1,7 @@
 extends Node2D
 #here i'm typesetting, so we know what 
 #values those are supposed to be
-var grid_position : Vector2i;
+@export var grid_position : Vector2i;
 var path_array : Array[Vector2i];
 var move_to_position : Vector2i;
 var act_timer : float;
