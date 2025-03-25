@@ -1,47 +1,34 @@
-[gd_scene load_steps=9 format=3 uid="uid://do7gg7hroa4mi"]
+[gd_scene load_steps=6 format=3 uid="uid://do7gg7hroa4mi"]
 
 [ext_resource type="Script" uid="uid://cjl1bs5857s6j" path="res://critter.gd" id="1_ydhak"]
+[ext_resource type="Texture2D" uid="uid://h4nxmt7jh1j1" path="res://graphics/critter1-back.png" id="2_l11x4"]
+[ext_resource type="Texture2D" uid="uid://dcx3um5kqdui8" path="res://graphics/critter1.png" id="3_c2etd"]
+[ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 
-[sub_resource type="SphereMesh" id="SphereMesh_ymid3"]
-
-[sub_resource type="Gradient" id="Gradient_34gfr"]
-offsets = PackedFloat32Array(0, 0.818182, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.305195, 0.305195, 0.305195, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xibd0"]
-frequency = 0.1726
-domain_warp_enabled = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s0gbd"]
-seamless = true
-seamless_blend_skirt = 0.168
-as_normal_map = true
-color_ramp = SubResource("Gradient_34gfr")
-noise = SubResource("FastNoiseLite_xibd0")
-
-[sub_resource type="Gradient" id="Gradient_k5oq3"]
-offsets = PackedFloat32Array(0.571429, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_34gfr"]
-frequency = 0.0214
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xibd0"]
-width = 1752
-seamless = true
-color_ramp = SubResource("Gradient_k5oq3")
-noise = SubResource("FastNoiseLite_34gfr")
+[sub_resource type="SpriteFrames" id="SpriteFrames_ydhak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c2etd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_l11x4")
+}],
+"loop": true,
+"name": &"front+back",
+"speed": 5.0
+}]
 
 [node name="Critter" type="Node2D"]
 script = ExtResource("1_ydhak")
 
-[node name="body" type="MeshInstance2D" parent="."]
-position = Vector2(2.28882e-05, 2.28882e-05)
-scale = Vector2(27.8803, 27.8803)
-mesh = SubResource("SphereMesh_ymid3")
-texture = SubResource("NoiseTexture2D_s0gbd")
+[node name="critter_AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ydhak")
+animation = &"front+back"
+script = ExtResource("3_l11x4")
 
-[node name="eye" type="MeshInstance2D" parent="body"]
-position = Vector2(0.0127466, -0.173224)
-scale = Vector2(0.208436, 0.208436)
-mesh = SubResource("SphereMesh_ymid3")
-texture = SubResource("NoiseTexture2D_xibd0")
+[connection signal="facing_back" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_back"]
+[connection signal="facing_forward" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_forward"]
+[connection signal="facing_left" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_left"]
+[connection signal="facing_right" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_right"]

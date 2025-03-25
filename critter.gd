@@ -2,6 +2,7 @@ extends Node2D
 #here i'm typesetting, so we know what 
 #values those are supposed to be
 @export var grid_position : Vector2i;
+var last_position : Vector2i;
 var path_array : Array[Vector2i];
 var move_to_position : Vector2i;
 var act_timer : float;
@@ -12,6 +13,11 @@ enum ACT {
 	MOVE,
 	FUN
 }
+signal has_moved;
+signal facing_back;
+signal facing_forward;
+signal facing_left;
+signal facing_right;
 #setting up initial values
 func _ready() -> void:
 	grid_position = Vector2i(0,0);
@@ -27,7 +33,6 @@ func _process(delta: float) -> void:
 		act_timer += delta;
 		return
 	act_timer = 0;
-	print(current_action)
 	#standing around, checks if needs anything done, otherwise finds a random spot 
 	#to walk to
 	match current_action:
@@ -45,12 +50,21 @@ func _process(delta: float) -> void:
 		ACT.MOVE:
 			#get the next position at the front
 			var next_position = path_array.pop_front();
-			print(next_position)
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
 			if not next_position:
 				current_action = ACT.IDLE;
 			else:
-				print(next_position)
+				last_position = grid_position;
 				grid_position = next_position;
+				emit_signal("has_moved");
+				var facing = (last_position-grid_position);
+				if facing.y > 0:
+					emit_signal("facing_back");
+				else:
+					emit_signal("facing_forward")
+				if facing.x == 1:
+					emit_signal("facing_left");
+				elif facing.x == -1:
+					emit_signal("facing_right");
 		ACT.FUN:
 			pass
