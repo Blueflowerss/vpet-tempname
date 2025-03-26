@@ -20,4 +20,6 @@ script = ExtResource("3_dygky")
 [node name="GridDisplayScene" parent="." instance=ExtResource("4_5q3ku")]
 grid_size = Vector2(32, 32)
 line_size = Vector2(2, 2)
-border_width = 1.0
+border_width = 2.0
+vline_color = Color(1, 1, 1, 0.262745)
+hline_color = Color(1, 1, 1, 0.262745)
