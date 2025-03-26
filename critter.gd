@@ -25,7 +25,7 @@ func _ready() -> void:
 	current_action = ACT.IDLE;
 func _physics_process(delta: float) -> void:
 	#decided to do animation here
-	position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),0.1);
+	position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),0.01);
 	pass
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
