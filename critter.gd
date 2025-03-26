@@ -24,12 +24,16 @@ signal facing_back;
 signal facing_forward;
 signal facing_left;
 signal facing_right;
+
+func set_state(state: ACT) -> void:
+	current_action = state;
+	act_timer_length = act_lengths[state];
 #setting up initial values
 func _ready() -> void:
 	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
 	current_action = ACT.IDLE;
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	#decided to do animation here
 	position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),delta);
 	pass
@@ -50,18 +54,14 @@ func _process(delta: float) -> void:
 			move_to_position = grid_position + random_near_spot; 
 			#getting a path to the spot from A* pathfinding thingi
 			@warning_ignore("unsafe_method_access")
-			path_array = get_parent().astar_grid.get_id_path(grid_position,abs(move_to_position));
-			#clear out the first waypoint, which is the critter's position
-			path_array.pop_front();
+			path_array = current_terrarium.astar_grid.get_id_path(grid_position,abs(move_to_position)).slice(1);
 			#time to move
-			current_action = ACT.MOVE;
-			act_timer_length = act_lengths[ACT.MOVE];
+			set_state(ACT.MOVE);
 		ACT.MOVE:
 			#get the next position at the front
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
 			if not path_array.front():
-				current_action = ACT.IDLE;
-				act_timer_length = act_lengths[ACT.IDLE];
+				set_state(ACT.IDLE);
 			else:
 				var next_position : Vector2i = path_array.pop_front();
 				last_position = grid_position;
@@ -76,6 +76,6 @@ func _process(delta: float) -> void:
 					emit_signal("facing_left");
 				elif facing.x == -1:
 					emit_signal("facing_right");
-				act_timer_length = act_lengths[ACT.MOVE];
+				set_state(ACT.MOVE);
 		ACT.FUN:
 			pass
