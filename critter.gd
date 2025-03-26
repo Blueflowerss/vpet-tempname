@@ -6,12 +6,18 @@ var last_position : Vector2i;
 var path_array : Array[Vector2i];
 var move_to_position : Vector2i;
 var act_timer : float;
+var act_timer_length : float;
 #this gonna be a state machine thing
 var current_action : ACT;
 enum ACT {
 	IDLE,
 	MOVE,
 	FUN
+}
+var act_lengths : Dictionary[ACT,float] = {
+	ACT.IDLE: 1.0,
+	ACT.MOVE: 0.1,
+	ACT.FUN: 0.1 
 }
 signal has_moved;
 signal facing_back;
@@ -29,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	pass
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
-	if act_timer < 0.3:
+	if act_timer < act_timer_length:
 		act_timer += delta;
 		return
 	act_timer = 0;
@@ -37,6 +43,7 @@ func _process(delta: float) -> void:
 	#to walk to
 	match current_action:
 		ACT.IDLE:
+			#is bored
 			#find a random spot near the critter
 			var random_near_spot : Vector2i = Vector2i(randi_range(-5,5),randi_range(-5,5));
 			#setting the random spot to move_to_spot
@@ -47,12 +54,14 @@ func _process(delta: float) -> void:
 			path_array.pop_front();
 			#time to move
 			current_action = ACT.MOVE;
+			act_timer_length = act_lengths[ACT.MOVE];
 		ACT.MOVE:
 			#get the next position at the front
 			var next_position = path_array.pop_front();
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
 			if not next_position:
 				current_action = ACT.IDLE;
+				act_timer_length = act_lengths[ACT.IDLE];
 			else:
 				last_position = grid_position;
 				grid_position = next_position;
@@ -66,5 +75,6 @@ func _process(delta: float) -> void:
 					emit_signal("facing_left");
 				elif facing.x == -1:
 					emit_signal("facing_right");
+				act_timer_length = act_lengths[ACT.MOVE];
 		ACT.FUN:
 			pass
