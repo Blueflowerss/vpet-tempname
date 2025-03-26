@@ -1,13 +1,13 @@
 extends Camera2D
 
-var camera_pan_speed = 10
+var camera_pan_speed : float = 10
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 			position += -1*event.relative/zoom;
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_pressed("pan_camera_up"):
 		position.y -= camera_pan_speed
 	if Input.is_action_pressed("pan_camera_down"):

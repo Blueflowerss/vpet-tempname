@@ -29,7 +29,7 @@ func _ready() -> void:
 	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
 	current_action = ACT.IDLE;
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	#decided to do animation here
 	position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),0.01);
 	pass
@@ -49,6 +49,7 @@ func _process(delta: float) -> void:
 			#setting the random spot to move_to_spot
 			move_to_position = grid_position + random_near_spot; 
 			#getting a path to the spot from A* pathfinding thingi
+			@warning_ignore("unsafe_method_access")
 			path_array = get_parent().astar_grid.get_id_path(grid_position,abs(move_to_position));
 			#clear out the first waypoint, which is the critter's position
 			path_array.pop_front();
@@ -57,16 +58,16 @@ func _process(delta: float) -> void:
 			act_timer_length = act_lengths[ACT.MOVE];
 		ACT.MOVE:
 			#get the next position at the front
-			var next_position = path_array.pop_front();
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
-			if not next_position:
+			if not path_array.front():
 				current_action = ACT.IDLE;
 				act_timer_length = act_lengths[ACT.IDLE];
 			else:
+				var next_position : Vector2i = path_array.pop_front();
 				last_position = grid_position;
 				grid_position = next_position;
 				emit_signal("has_moved");
-				var facing = (last_position-grid_position);
+				var facing : Vector2 = (last_position-grid_position);
 				if facing.y > 0:
 					emit_signal("facing_back");
 				else:
