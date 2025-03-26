@@ -2,6 +2,7 @@ extends Node2D
 #here i'm typesetting, so we know what 
 #values those are supposed to be
 @export var grid_position : Vector2i;
+var current_terrarium : Node2D;
 var last_position : Vector2i;
 var path_array : Array[Vector2i];
 var move_to_position : Vector2i;
@@ -30,6 +31,7 @@ func set_state(state: ACT) -> void:
 	act_timer_length = act_lengths[state];
 #setting up initial values
 func _ready() -> void:
+	current_terrarium = get_parent();
 	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
 	current_action = ACT.IDLE;
@@ -79,3 +81,13 @@ func _process(delta: float) -> void:
 				set_state(ACT.MOVE);
 		ACT.FUN:
 			pass
+func _input(event: InputEvent) -> void:
+	#order your critters like a puppet master
+	if event.is_action_pressed("move"):
+		var id_path : Array[Vector2i] = current_terrarium.astar_grid.get_id_path(
+			current_terrarium.tilemap.local_to_map(global_position),
+			current_terrarium.tilemap.local_to_map(get_global_mouse_position())
+			).slice(1)
+		path_array = id_path;
+		set_state(ACT.MOVE);
+	
