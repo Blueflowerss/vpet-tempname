@@ -16,7 +16,7 @@ enum ACT {
 }
 var act_lengths : Dictionary[ACT,float] = {
 	ACT.IDLE: 1.0,
-	ACT.MOVE: 0.1,
+	ACT.MOVE: 0.15,
 	ACT.FUN: 0.1 
 }
 signal has_moved;
