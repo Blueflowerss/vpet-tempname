@@ -2,7 +2,7 @@ extends Node2D
 #here i'm typesetting, so we know what 
 #values those are supposed to be
 @export var grid_position : Vector2i;
-var current_terrarium : Node2D;
+var current_terrarium : Terrarium;
 var last_position : Vector2i;
 var path_array : Array[Vector2i];
 var move_to_position : Vector2i;
