@@ -40,7 +40,8 @@ func _physics_process(delta: float) -> void:
 	#position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),delta*3);
 	var next_position : Vector2 = Vector2((grid_position * 64) + Vector2i(32,32));
 	var distance_to_next_tile : float = next_position.distance_to(position);
-	position += position.direction_to(next_position) * 10;
+	if distance_to_next_tile > 5:
+		position += position.direction_to(next_position) * 10;
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
 	if act_timer < act_timer_length:
