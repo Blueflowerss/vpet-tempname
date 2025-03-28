@@ -7,9 +7,6 @@ class_name Critter
 var current_terrarium : Terrarium;
 var last_position : Vector2i;
 var path_array : Array[Vector2i];
-#if path blocked, wait until it gets unblocked or return to IDLE if the wait is too long
-var path_blocked_timer : int = 0;
-@export var path_blocked_timeout_limit : int = 3;
 var move_to_position : Vector2i;
 var act_timer : float;
 var act_timer_length : float;
