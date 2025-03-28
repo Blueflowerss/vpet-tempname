@@ -16,7 +16,7 @@ enum ACT {
 	FUN
 }
 var act_lengths : Dictionary[ACT,float] = {
-	ACT.IDLE: 3.0,
+	ACT.IDLE: 0,
 	ACT.MOVE: 0.1,
 	ACT.FUN: 0.1 
 }
@@ -37,7 +37,7 @@ func _ready() -> void:
 	current_action = ACT.IDLE;
 func _physics_process(delta: float) -> void:
 	#decided to do animation here
-	position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),delta);
+	position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),delta*3);
 	pass
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
@@ -49,6 +49,9 @@ func _process(delta: float) -> void:
 	#to walk to
 	match current_action:
 		ACT.IDLE:
+			# randomize duration of idle time whenever idle state becomes current state
+			act_lengths[ACT.IDLE] = randf_range(0.5, 6.0) 
+			print(act_lengths)
 			#is bored
 			#find a random spot near the critter
 			var random_near_spot : Vector2i = Vector2i(randi_range(-5,5),randi_range(-5,5));
