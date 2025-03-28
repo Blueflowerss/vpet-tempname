@@ -1,7 +1,9 @@
 extends Node2D
+class_name Critter
 #here i'm typesetting, so we know what 
 #values those are supposed to be
 @export var grid_position : Vector2i;
+@export var impassable_group_list : Array[String]; 
 var current_terrarium : Terrarium;
 var last_position : Vector2i;
 var path_array : Array[Vector2i];
@@ -25,6 +27,7 @@ signal facing_back;
 signal facing_forward;
 signal facing_left;
 signal facing_right;
+signal position_changed;
 
 func set_state(state: ACT) -> void:
 	current_action = state;
@@ -41,7 +44,7 @@ func _physics_process(delta: float) -> void:
 	var next_position : Vector2 = Vector2((grid_position * 64) + Vector2i(32,32));
 	var distance_to_next_tile : float = next_position.distance_to(position);
 	if distance_to_next_tile > 5:
-		position += position.direction_to(next_position) * 10;
+		position += position.direction_to(next_position) * 8;
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
 	if act_timer < act_timer_length:
@@ -54,7 +57,6 @@ func _process(delta: float) -> void:
 		ACT.IDLE:
 			# randomize duration of idle time whenever idle state becomes current state
 			act_lengths[ACT.IDLE] = randf_range(0.5, 6.0) 
-			print(act_lengths)
 			#is bored
 			#find a random spot near the critter
 			var random_near_spot : Vector2i = Vector2i(randi_range(-5,5),randi_range(-5,5));
@@ -62,7 +64,7 @@ func _process(delta: float) -> void:
 			move_to_position = grid_position + random_near_spot; 
 			#getting a path to the spot from A* pathfinding thingi
 			@warning_ignore("unsafe_method_access")
-			path_array = current_terrarium.astar_grid.get_id_path(grid_position,abs(move_to_position)).slice(1);
+			path_array = current_terrarium.pathfind_conditional(grid_position,abs(move_to_position),impassable_group_list).slice(1);
 			#time to move
 			set_state(ACT.MOVE);
 		ACT.MOVE:
@@ -70,6 +72,7 @@ func _process(delta: float) -> void:
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
 			if not path_array.front():
 				set_state(ACT.IDLE);
+				emit_signal("position_changed");
 			else:
 				var next_position : Vector2i = path_array.pop_front();
 				last_position = grid_position;
@@ -90,10 +93,9 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	#order your critters like a puppet master
 	if event.is_action_pressed("move"):
-		var id_path : Array[Vector2i] = current_terrarium.astar_grid.get_id_path(
+		var id_path : Array[Vector2i] = current_terrarium.pathfind_conditional(
 			current_terrarium.tilemap.local_to_map(global_position),
-			current_terrarium.tilemap.local_to_map(get_global_mouse_position())
-			).slice(1)
+			current_terrarium.tilemap.local_to_map(get_global_mouse_position()),impassable_group_list).slice(1)
 		path_array = id_path;
 		set_state(ACT.MOVE);
 	
