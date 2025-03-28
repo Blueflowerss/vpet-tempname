@@ -70,7 +70,7 @@ func _process(delta: float) -> void:
 		ACT.MOVE:
 			#get the next position at the front
 			#if next pos is null (aka critter reached the destination, then change back to IDLE and don't change position)
-			if not path_array.front():
+			if not path_array.front() or current_terrarium.are_entities_blocking_tile(path_array.front(),impassable_group_list):
 				set_state(ACT.IDLE);
 				emit_signal("position_changed");
 			else:

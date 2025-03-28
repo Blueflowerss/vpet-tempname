@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cjl1bs5857s6j" path="res://critter.gd" id="1_ydhak"]
 [ext_resource type="Texture2D" uid="uid://h4nxmt7jh1j1" path="res://graphics/critter1-back.png" id="2_l11x4"]
 [ext_resource type="Texture2D" uid="uid://dcx3um5kqdui8" path="res://graphics/critter1.png" id="3_c2etd"]
-[ext_resource type="Script" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
+[ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydhak"]
 animations = [{
@@ -57,8 +57,9 @@ _data = {
 &"back_idle": SubResource("Animation_c2etd")
 }
 
-[node name="Critter" type="Node2D"]
+[node name="Critter" type="Node2D" groups=["entity", "player_controlled"]]
 script = ExtResource("1_ydhak")
+impassable_group_list = Array[String](["entity"])
 
 [node name="critter_AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
