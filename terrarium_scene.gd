@@ -6,6 +6,7 @@ var tilemap : TileMapLayer;
 func _ready() -> void:
 	tilemap = $TileMapLayer;
 	astar_grid.region = Rect2i(Vector2i.ZERO,grid_size);
+	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES;
 	astar_grid.update();
 	$GridDisplayScene.grid_size = grid_size;
 	refresh_terrain_grid();
