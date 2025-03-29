@@ -21,6 +21,7 @@ signal facing_right;
 signal position_changed;
 
 func set_state(state: BaseState.ACT) -> void:
+	assert(assigned_states.has(state),"entity doesn't have state node: "+BaseState.ACT.keys()[state])
 	if assigned_states.has(current_action):
 		assigned_states[current_action].process_mode = Node.PROCESS_MODE_DISABLED;
 	current_action = state;
@@ -46,8 +47,3 @@ func _process(delta: float) -> void:
 	act_timer = 0;
 	#standing around, checks if needs anything done, otherwise finds a random spot 
 	#to walk to
-	
-
-
-func _on_idle_state_change(STATE: String) -> void:
-	print(STATE)

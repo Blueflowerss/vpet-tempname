@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctapy88li8jb2"]
+
+[ext_resource type="Script" uid="uid://twre0qe073q1" path="res://states/move_state.gd" id="1_ytxol"]
+
+[node name="CRITTER_MOVE" type="Node" groups=["StateMachineState"]]
+process_mode = 4
+script = ExtResource("1_ytxol")

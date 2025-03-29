@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfsskvswlqiyv"]
+
+[ext_resource type="Script" uid="uid://d3p40agocuxgx" path="res://states/think_state.gd" id="1_hqfs8"]
+
+[node name="CRITTER_THINK" type="Node" groups=["StateMachineState"]]
+process_mode = 4
+script = ExtResource("1_hqfs8")

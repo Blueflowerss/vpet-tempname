@@ -9,4 +9,5 @@ func _process(delta: float) -> void:
 		return
 	state_time = 0;
 	state_time_limit = randf_range(1,10);
-	entity.set_state(ACT.WANDER);
+	if entity.assigned_states.has(ACT.WANDER):
+		entity.set_state(ACT.WANDER);

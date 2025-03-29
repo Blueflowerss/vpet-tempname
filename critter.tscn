@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://h4nxmt7jh1j1" path="res://graphics/critter1-back.png" id="2_l11x4"]
 [ext_resource type="Texture2D" uid="uid://dcx3um5kqdui8" path="res://graphics/critter1.png" id="3_c2etd"]
 [ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
-[ext_resource type="Script" uid="uid://d3p40agocuxgx" path="res://states/think_state.gd" id="5_xts2v"]
-[ext_resource type="Script" uid="uid://bhyvj0r2wil83" path="res://states/wander_state.gd" id="6_202f7"]
-[ext_resource type="Script" uid="uid://twre0qe073q1" path="res://states/move_state.gd" id="7_lr5tc"]
+[ext_resource type="PackedScene" uid="uid://bfsskvswlqiyv" path="res://state_nodes/critter_think.tscn" id="5_lr5tc"]
+[ext_resource type="PackedScene" uid="uid://cxq08o57jhypo" path="res://state_nodes/critter_wander.tscn" id="6_nvc7m"]
+[ext_resource type="PackedScene" uid="uid://ctapy88li8jb2" path="res://state_nodes/critter_move.tscn" id="7_6rewe"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydhak"]
 animations = [{
@@ -79,22 +79,13 @@ libraries = {
 }
 autoplay = "back_idle"
 
-[node name="CRITTER_THINK" type="Node" parent="." groups=["StateMachineState"]]
-process_mode = 4
-script = ExtResource("5_xts2v")
+[node name="CRITTER_THINK" parent="." instance=ExtResource("5_lr5tc")]
 
-[node name="CRITTER_WANDER" type="Node" parent="." groups=["StateMachineState"]]
-process_mode = 4
-script = ExtResource("6_202f7")
+[node name="CRITTER_WANDER" parent="." instance=ExtResource("6_nvc7m")]
 
-[node name="CRITTER_MOVE" type="Node" parent="." groups=["StateMachineState"]]
-process_mode = 4
-script = ExtResource("7_lr5tc")
+[node name="CRITTER_MOVE" parent="." instance=ExtResource("7_6rewe")]
 
 [connection signal="facing_back" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_back"]
 [connection signal="facing_forward" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_forward"]
 [connection signal="facing_left" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_left"]
 [connection signal="facing_right" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_right"]
-[connection signal="state_change" from="CRITTER_THINK" to="." method="_on_critter_idle_state_change"]
-[connection signal="state_change" from="CRITTER_WANDER" to="." method="_on_critter_idle_state_change"]
-[connection signal="state_change" from="CRITTER_MOVE" to="." method="_on_critter_idle_state_change"]

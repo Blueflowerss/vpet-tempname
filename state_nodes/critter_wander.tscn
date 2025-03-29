@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxq08o57jhypo"]
+
+[ext_resource type="Script" uid="uid://bhyvj0r2wil83" path="res://states/wander_state.gd" id="1_ln6gc"]
+
+[node name="CRITTER_WANDER" type="Node" groups=["StateMachineState"]]
+process_mode = 4
+script = ExtResource("1_ln6gc")
