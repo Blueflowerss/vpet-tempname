@@ -9,9 +9,10 @@ enum ACT {
 	NONE
 }
 const act_lengths : Dictionary[ACT,float] = {
-	ACT.IDLE: 0,
-	ACT.MOVE: 0.1,
-	ACT.FUN: 0.1 
+	ACT.MOVE:0.1,
+	ACT.FUN:2,
+	ACT.THINK:1,
+	ACT.WANDER:0.1
 }
 var state_time : float = 0;
 var state_time_limit : float = 1;

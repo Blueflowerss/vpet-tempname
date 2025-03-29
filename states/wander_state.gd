@@ -4,6 +4,11 @@ func _init() -> void:
 	state_id = ACT.WANDER;
 
 func _process(delta: float) -> void:
+		if state_time < state_time_limit:
+			state_time += delta;
+			return
+		state_time = 0;
+		state_time_limit = act_lengths[state_id] + randf_range(0.1,2);
 		# randomize duration of idle time whenever idle state becomes current state
 		#is bored
 		#find a random spot near the critter
