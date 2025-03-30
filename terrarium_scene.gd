@@ -6,17 +6,24 @@ var entity_layer : Dictionary[Vector2i,Array];
 var terrain_obstacle_grid : Array[Vector2i];
 var obstacle_grid : Dictionary[Vector2i,bool] = {};
 var grid_size : Vector2i = Vector2i(32,32);
+var grid_cell_size : Vector2 = Vector2(64,64);
 var tilemap : TileMapLayer;
+var selection_rect : Panel;
+
 func _ready() -> void:
 	tilemap = $TileMapLayer;
+	selection_rect = $selection_rect;
 	entity_layer = {};
 	astar_grid.region = Rect2i(Vector2i.ZERO,grid_size);
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES;
 	astar_grid.update();
 	$GridDisplayScene.grid_size = grid_size;
-	spawn_critters(100);
+	$GridDisplayScene.cell_size = grid_cell_size;
+	spawn_critters(2);
 	refresh_terrain_grid();
 	refresh_entity_map();
+
+
 func pathfind_conditional(from : Vector2i, to : Vector2i, impassable : Array[String]) -> Array[Vector2i]:
 	astar_grid.fill_solid_region(astar_grid.region,false);
 	for terrain_point : Vector2i in terrain_obstacle_grid:
@@ -37,8 +44,15 @@ func are_entities_blocking_tile(tile : Vector2i, impassable : Array[String]) -> 
 			if entity.is_in_group(tag):
 				return true;
 	return false;
+func get_units_in_rect(first_pos : Vector2i, second_pos : Vector2i) -> Array[Node2D]:
+	var units : Array[Node2D];
+	for entity_array_pos in entity_layer.keys():
+		if entity_array_pos >= first_pos and entity_array_pos <= second_pos:
+			units.append_array(entity_layer[entity_array_pos]);
+	return units;
+	#print("\n");
 func spawn_critters(amount : int) -> void:
-	for i in range(1,amount):
+	for i in range(0,amount):
 		var critterNode : Critter = critter_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED);
 		critterNode.connect("has_moved",refresh_entity_map);
 		add_child(critterNode);
