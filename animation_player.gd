@@ -15,3 +15,7 @@ func _process(delta: float) -> void:
 func _on_critter_play_animation(animation: String) -> void:
 	assert(has_animation(animation), "no animation \""+animation+"\" exists for the entity");
 	play(animation)
+
+
+func _on_critter_stop_animation() -> void:
+	stop();

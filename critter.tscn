@@ -174,4 +174,5 @@ script = ExtResource("11_av5dc")
 [connection signal="facing_right" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_right"]
 [connection signal="play_animation" from="." to="AnimationPlayer" method="_on_critter_play_animation"]
 [connection signal="selected" from="." to="critter_AnimatedSprite2D/selection_circle" method="_on_critter_selected"]
+[connection signal="stop_animation" from="." to="AnimationPlayer" method="_on_critter_stop_animation"]
 [connection signal="unselected" from="." to="critter_AnimatedSprite2D/selection_circle" method="_on_critter_unselected"]

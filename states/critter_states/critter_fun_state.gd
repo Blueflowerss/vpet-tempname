@@ -4,11 +4,15 @@ func _init() -> void:
 	state_type = "IDLE";
 	super();
 func _process(delta: float) -> void:
-	entity.emit_signal("play_animation","fun_jump");
 	if state_time < state_time_limit:
 		state_time += delta;
 		return
 	state_time = 0;
-	entity.emit_signal("play_animation","RESET");
-	entity.emit_signal("play_animation","back_idle");
 	entity.set_state(ACT.THINK);
+func on_state_active():
+	print("active")
+	entity.emit_signal("play_animation","fun_jump");
+func on_state_inactive():
+	entity.emit_signal("stop_animation");
+	entity.emit_signal("play_animation","back_idle");
+	

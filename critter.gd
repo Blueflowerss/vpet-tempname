@@ -22,6 +22,7 @@ signal facing_forward;
 signal facing_left;
 signal facing_right;
 signal position_changed;
+signal stop_animation;
 signal play_animation(animation);
 signal selected;
 signal unselected;
@@ -30,8 +31,9 @@ func set_state(state: BaseState.ACT) -> void:
 	assert(assigned_states.has(state),"entity doesn't have state node: "+BaseState.ACT.keys()[state])
 	if assigned_states.has(current_action):
 		assigned_states[current_action].process_mode = Node.PROCESS_MODE_DISABLED;
+		assigned_states[current_action].on_state_inactive();
 	current_action = state;
-	assigned_states[state].when_set_to();
+	assigned_states[state].on_state_active();
 	assigned_states[state].process_mode = Node.PROCESS_MODE_ALWAYS;
 #setting up initial values
 func _ready() -> void:

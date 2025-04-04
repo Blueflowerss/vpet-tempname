@@ -29,5 +29,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	print(entity);
-func when_set_to() -> void:
+func on_state_active() -> void:
+	pass
+func on_state_inactive() -> void:
 	pass
