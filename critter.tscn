@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://do7gg7hroa4mi"]
+[gd_scene load_steps=14 format=3 uid="uid://do7gg7hroa4mi"]
 
 [ext_resource type="Script" uid="uid://cjl1bs5857s6j" path="res://critter.gd" id="1_ydhak"]
 [ext_resource type="Texture2D" uid="uid://h4nxmt7jh1j1" path="res://graphics/critter1-back.png" id="2_l11x4"]
 [ext_resource type="Texture2D" uid="uid://dcx3um5kqdui8" path="res://graphics/critter1.png" id="3_c2etd"]
-[ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
+[ext_resource type="Script" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 [ext_resource type="PackedScene" uid="uid://bfsskvswlqiyv" path="res://state_nodes/critter_think.tscn" id="5_lr5tc"]
+[ext_resource type="Script" uid="uid://qvcoj48bc02n" path="res://animation_player.gd" id="5_nvc7m"]
 [ext_resource type="PackedScene" uid="uid://cxq08o57jhypo" path="res://state_nodes/critter_wander.tscn" id="6_nvc7m"]
 [ext_resource type="PackedScene" uid="uid://ctapy88li8jb2" path="res://state_nodes/critter_move.tscn" id="7_6rewe"]
 
@@ -36,6 +37,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_c2etd"]
 resource_name = "back_idle"
@@ -54,10 +79,52 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1, 0.865), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_nvc7m"]
+resource_name = "fun_jump"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 32), Vector2(0, 32), Vector2(0, 20), Vector2(0, 32), Vector2(0, 32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.859375), Vector2(1, 1.0625), Vector2(1, 0.921875), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0, 0.0, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_202f7"]
 _data = {
 &"RESET": SubResource("Animation_xts2v"),
-&"back_idle": SubResource("Animation_c2etd")
+&"back_idle": SubResource("Animation_c2etd"),
+&"fun_jump": SubResource("Animation_nvc7m")
 }
 
 [node name="Critter" type="Node2D" groups=["entity", "player_controlled"]]
@@ -77,7 +144,7 @@ root_node = NodePath("../critter_AnimatedSprite2D")
 libraries = {
 &"": SubResource("AnimationLibrary_202f7")
 }
-autoplay = "back_idle"
+script = ExtResource("5_nvc7m")
 
 [node name="CRITTER_THINK" parent="." instance=ExtResource("5_lr5tc")]
 
