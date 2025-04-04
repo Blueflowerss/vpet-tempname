@@ -9,5 +9,6 @@ func _process(delta: float) -> void:
 		state_time += delta;
 		return
 	state_time = 0;
+	entity.emit_signal("play_animation","RESET");
 	entity.emit_signal("play_animation","back_idle");
 	entity.set_state(ACT.THINK);

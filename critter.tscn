@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 [ext_resource type="PackedScene" uid="uid://bfsskvswlqiyv" path="res://state_nodes/critter_think.tscn" id="5_lr5tc"]
 [ext_resource type="Script" uid="uid://qvcoj48bc02n" path="res://animation_player.gd" id="5_nvc7m"]
-[ext_resource type="Script" uid="uid://c28eybcfw4ed" path="res://selection_circle.gd" id="6_6rewe"]
+[ext_resource type="Script" path="res://selection_circle.gd" id="6_6rewe"]
 [ext_resource type="PackedScene" uid="uid://cxq08o57jhypo" path="res://state_nodes/critter_wander.tscn" id="6_nvc7m"]
 [ext_resource type="PackedScene" uid="uid://ctapy88li8jb2" path="res://state_nodes/critter_move.tscn" id="7_6rewe"]
 [ext_resource type="Texture2D" uid="uid://ia8iqdk4rwev" path="res://graphics/circle.png" id="8_nvc7m"]
@@ -32,7 +32,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
@@ -44,7 +44,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
@@ -84,43 +84,43 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_nvc7m"]
 resource_name = "fun_jump"
-length = 1.2
+length = 0.9
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.433333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 32), Vector2(0, 32), Vector2(0, 20), Vector2(0, 32), Vector2(0, 32)]
+"values": [Vector2(0, 32), Vector2(0, 32), Vector2(0, 15), Vector2(0, 32)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 2
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.433333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.859375), Vector2(1, 1.0625), Vector2(1, 0.921875), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1, 0.859375), Vector2(1, 1), Vector2(1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath(".:rotation")
 tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/loop_wrap = false
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.433333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.0, 0.0, 0.0]
+"values": [0.0, 0.0, 0.0, 0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_202f7"]
