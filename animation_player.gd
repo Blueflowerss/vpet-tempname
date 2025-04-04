@@ -10,3 +10,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _on_critter_play_animation(animation: String) -> void:
+	assert(has_animation(animation), "no animation \""+animation+"\" exists for the entity");
+	play(animation)

@@ -15,12 +15,14 @@ var act_timer_length : float;
 #this gonna be a state machine thing
 var current_action : BaseState.ACT;
 var assigned_states : Dictionary[BaseState.ACT,Node];
+var states_by_type : Dictionary[String, Array];
 signal has_moved;
 signal facing_back;
 signal facing_forward;
 signal facing_left;
 signal facing_right;
 signal position_changed;
+signal play_animation(animation);
 signal selected;
 signal unselected;
 
@@ -29,12 +31,18 @@ func set_state(state: BaseState.ACT) -> void:
 	if assigned_states.has(current_action):
 		assigned_states[current_action].process_mode = Node.PROCESS_MODE_DISABLED;
 	current_action = state;
+	assigned_states[state].when_set_to();
 	assigned_states[state].process_mode = Node.PROCESS_MODE_ALWAYS;
 #setting up initial values
 func _ready() -> void:
 	current_terrarium = get_parent();
 	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
+	#group states by their type, used for behaviour randomization
+	for state in assigned_states.values():
+		if !states_by_type.has(state.state_type):
+			states_by_type[state.state_type] = [];
+		states_by_type[state.state_type].append(state);
 	set_state(BaseState.ACT.THINK);
 func _physics_process(delta: float) -> void:
 	#decided to do animation here
@@ -44,9 +52,6 @@ func _physics_process(delta: float) -> void:
 	position = position.move_toward(next_position,8*1);
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
-	if act_timer < act_timer_length:
-		act_timer += delta;
-		return
-	act_timer = 0;
+	pass
 	#standing around, checks if needs anything done, otherwise finds a random spot 
 	#to walk to

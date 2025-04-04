@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://do7gg7hroa4mi"]
+[gd_scene load_steps=17 format=3 uid="uid://do7gg7hroa4mi"]
 
 [ext_resource type="Script" uid="uid://cjl1bs5857s6j" path="res://critter.gd" id="1_ydhak"]
 [ext_resource type="Texture2D" uid="uid://h4nxmt7jh1j1" path="res://graphics/critter1-back.png" id="2_l11x4"]
 [ext_resource type="Texture2D" uid="uid://dcx3um5kqdui8" path="res://graphics/critter1.png" id="3_c2etd"]
-[ext_resource type="Script" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
+[ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 [ext_resource type="PackedScene" uid="uid://bfsskvswlqiyv" path="res://state_nodes/critter_think.tscn" id="5_lr5tc"]
-[ext_resource type="Script" uid="uid://c28eybcfw4ed" path="res://selection_circle.gd" id="6_6rewe"]
 [ext_resource type="Script" uid="uid://qvcoj48bc02n" path="res://animation_player.gd" id="5_nvc7m"]
+[ext_resource type="Script" uid="uid://c28eybcfw4ed" path="res://selection_circle.gd" id="6_6rewe"]
 [ext_resource type="PackedScene" uid="uid://cxq08o57jhypo" path="res://state_nodes/critter_wander.tscn" id="6_nvc7m"]
 [ext_resource type="PackedScene" uid="uid://ctapy88li8jb2" path="res://state_nodes/critter_move.tscn" id="7_6rewe"]
 [ext_resource type="Texture2D" uid="uid://ia8iqdk4rwev" path="res://graphics/circle.png" id="8_nvc7m"]
+[ext_resource type="Script" uid="uid://soiox3wj46p3" path="res://states/critter_states/critter_fun_state.gd" id="11_av5dc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ydhak"]
 animations = [{
@@ -163,9 +164,13 @@ script = ExtResource("5_nvc7m")
 
 [node name="CRITTER_MOVE" parent="." instance=ExtResource("7_6rewe")]
 
+[node name="CRITTER_FUN" parent="." instance=ExtResource("7_6rewe")]
+script = ExtResource("11_av5dc")
+
 [connection signal="facing_back" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_back"]
 [connection signal="facing_forward" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_forward"]
 [connection signal="facing_left" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_left"]
 [connection signal="facing_right" from="." to="critter_AnimatedSprite2D" method="_on_critter_facing_right"]
+[connection signal="play_animation" from="." to="AnimationPlayer" method="_on_critter_play_animation"]
 [connection signal="selected" from="." to="critter_AnimatedSprite2D/selection_circle" method="_on_critter_selected"]
 [connection signal="unselected" from="." to="critter_AnimatedSprite2D/selection_circle" method="_on_critter_unselected"]

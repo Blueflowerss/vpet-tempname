@@ -2,6 +2,8 @@ extends CritterState
 
 func _init() -> void:
 	state_id = ACT.WANDER;
+	state_type = "IDLE";
+	super();
 func _ready() -> void:
 	super();
 func _process(delta: float) -> void:
