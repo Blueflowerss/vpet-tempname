@@ -9,7 +9,7 @@ enum ACT {
 	NONE
 }
 const act_lengths : Dictionary[ACT,float] = {
-	ACT.MOVE:0.1,
+	ACT.MOVE:0.1/1,
 	ACT.FUN:2,
 	ACT.THINK:1,
 	ACT.WANDER:0.1

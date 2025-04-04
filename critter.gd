@@ -4,6 +4,8 @@ class_name Critter
 #values those are supposed to be
 @export var grid_position : Vector2i;
 @export var impassable_group_list : Array[String]; 
+@export var move_speed : float;
+# exporting move_speed as a test to try and have it accessible through other files
 var current_terrarium : Terrarium;
 var last_position : Vector2i;
 var path_array : Array[Vector2i];
@@ -39,7 +41,7 @@ func _physics_process(delta: float) -> void:
 	#position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),delta*3);
 	var next_position : Vector2 = Vector2((grid_position * 64) + Vector2i(32,32));
 	var distance_to_next_tile : float = next_position.distance_to(position);
-	position = position.move_toward(next_position,8);
+	position = position.move_toward(next_position,8*1);
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
 	if act_timer < act_timer_length:
