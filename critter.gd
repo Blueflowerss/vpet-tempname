@@ -19,6 +19,8 @@ signal facing_forward;
 signal facing_left;
 signal facing_right;
 signal position_changed;
+signal selected;
+signal unselected;
 
 func set_state(state: BaseState.ACT) -> void:
 	assert(assigned_states.has(state),"entity doesn't have state node: "+BaseState.ACT.keys()[state])
