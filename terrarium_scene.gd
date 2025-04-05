@@ -28,10 +28,10 @@ func pathfind_conditional(from : Vector2i, to : Vector2i, impassable : Array[Str
 	astar_grid.fill_solid_region(astar_grid.region,false);
 	for terrain_point : Vector2i in terrain_obstacle_grid:
 		astar_grid.set_point_solid(terrain_point);
-	for entity_pos in entity_layer.keys():
+	for entity_pos : Vector2i in entity_layer.keys():
 		for tag : String in impassable:
 			var entities : Array = entity_layer[entity_pos];
-			for entity : Node2D in entities:
+			for entity : Critter in entities:
 				if entity.is_in_group(tag):
 					astar_grid.set_point_solid(entity.grid_position);
 					break;
@@ -46,19 +46,19 @@ func are_entities_blocking_tile(tile : Vector2i, impassable : Array[String]) -> 
 	return false;
 func get_units_in_rect(first_pos : Vector2i, second_pos : Vector2i) -> Array[Node2D]:
 	var units : Array[Node2D];
-	for entity_array_pos in entity_layer.keys():
+	for entity_array_pos : Vector2i in entity_layer.keys():
 		if entity_array_pos >= first_pos and entity_array_pos <= second_pos:
 			units.append_array(entity_layer[entity_array_pos]);
 	return units;
 	#print("\n");
 func spawn_critters(amount : int) -> void:
-	for i in range(0,amount):
+	for i : int in range(0,amount):
 		var critterNode : Critter = critter_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED);
 		critterNode.connect("has_moved",refresh_entity_map);
 		add_child(critterNode);
 func refresh_terrain_grid() -> void:
-	for x in range(astar_grid.region.position.x,astar_grid.region.end.x):
-		for y in range(astar_grid.region.position.y,astar_grid.region.end.y):
+	for x : int in range(astar_grid.region.position.x,astar_grid.region.end.x):
+		for y : int in range(astar_grid.region.position.y,astar_grid.region.end.y):
 			var point : Vector2i = Vector2i(x,y);
 			var tile : TileData = tilemap.get_cell_tile_data(point);
 			if tile and tile.has_custom_data("blocking_path"):

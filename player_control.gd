@@ -15,7 +15,7 @@ func _input(event: InputEvent) -> void:
 						selection_square[1] = get_global_mouse_position();
 						$selection_rect.position = selection_square[0];
 						if !selected_units.is_empty():
-							for entity in selected_units:
+							for entity : Critter in selected_units:
 								entity.emit_signal("unselected");
 						selected_units = [];
 					else: 
@@ -25,13 +25,13 @@ func _input(event: InputEvent) -> void:
 						if selection_square[0].distance_to(selection_square[1]) < current_terrarium.grid_cell_size.x and selected_units.front() != null:
 							selected_units = [selected_units.front()];
 						if !selected_units.is_empty():
-							for entity in selected_units:
+							for entity : Critter in selected_units:
 								entity.emit_signal("selected");
 						#reset the square
 						selection_square = [Vector2.ZERO,Vector2.ZERO];
 				MOUSE_BUTTON_RIGHT:
 						#order your critters like a puppet master
-							for entity in selected_units:
+							for entity : Critter in selected_units:
 								var id_path : Array[Vector2i] = entity.current_terrarium.pathfind_conditional(
 									entity.current_terrarium.tilemap.local_to_map(entity.global_position),
 									entity.current_terrarium.tilemap.local_to_map(entity.get_global_mouse_position()),entity.impassable_group_list).slice(1)
