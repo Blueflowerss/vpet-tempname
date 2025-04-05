@@ -10,8 +10,14 @@ func _process(delta: float) -> void:
 	state_time = 0;
 	entity.set_state(ACT.THINK);
 func on_state_active():
+	var fun_type: int;
+	#fun_type = randi_range(1,2)
 	print("active")
-	entity.emit_signal("play_animation","fun_jump");
+	entity.emit_signal("play_animation","fun_dance");
+	#if  fun_type = 1:
+		#entity.emit_signal("play_animation","fun_dance");
+	#else:
+		#entity.emit_signal("play_animation","fun_jump");
 func on_state_inactive():
 	entity.emit_signal("stop_animation");
 	entity.emit_signal("play_animation","back_idle");

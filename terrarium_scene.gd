@@ -19,7 +19,7 @@ func _ready() -> void:
 	astar_grid.update();
 	$GridDisplayScene.grid_size = grid_size;
 	$GridDisplayScene.cell_size = grid_cell_size;
-	spawn_critters(2);
+	spawn_critters(1);
 	refresh_terrain_grid();
 	refresh_entity_map();
 
