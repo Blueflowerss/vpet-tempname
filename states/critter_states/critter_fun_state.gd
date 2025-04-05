@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 func on_state_active():
 	var fun_type: int;
 	#fun_type = randi_range(1,2)
-	print("active")
 	entity.emit_signal("play_animation","fun_dance");
 	#if  fun_type = 1:
 		#entity.emit_signal("play_animation","fun_dance");

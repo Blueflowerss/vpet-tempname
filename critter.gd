@@ -7,6 +7,7 @@ class_name Critter
 @export var move_speed : float;
 # exporting move_speed as a test to try and have it accessible through other files
 var current_terrarium : Terrarium;
+var ref_sheet : ref_sheet_class;
 var last_position : Vector2i;
 var path_array : Array[Vector2i];
 var move_to_position : Vector2i;
@@ -38,6 +39,7 @@ func set_state(state: BaseState.ACT) -> void:
 #setting up initial values
 func _ready() -> void:
 	current_terrarium = get_parent();
+	ref_sheet = ref_sheet_class.new();
 	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
 	#group states by their type, used for behaviour randomization
@@ -51,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	#position = lerp(position,Vector2((grid_position * 64) + Vector2i(32,32)),delta*3);
 	var next_position : Vector2 = Vector2((grid_position * 64) + Vector2i(32,32));
 	#var distance_to_next_tile : float = next_position.distance_to(position);
-	position = position.move_toward(next_position,8*1);
+	position = position.move_toward(next_position,1*ref_sheet.MOVE_SPEED);
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
 	pass

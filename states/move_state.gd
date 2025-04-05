@@ -6,6 +6,8 @@ func _init() -> void:
 	super();
 func _ready() -> void:
 	super();
+func on_state_active() -> void:
+	state_time_limit = act_lengths[state_id] / entity.ref_sheet.MOVE_SPEED;
 func _process(delta: float) -> void:
 	if state_time < state_time_limit:
 		state_time += delta;
