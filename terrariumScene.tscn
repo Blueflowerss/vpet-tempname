@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cta1bd11q6cjx"]
+[gd_scene load_steps=14 format=4 uid="uid://cta1bd11q6cjx"]
 
 [ext_resource type="Script" uid="uid://cp0gutj6ktv0i" path="res://terrarium_scene.gd" id="1_8xau6"]
 [ext_resource type="Script" uid="uid://4oydw30fmf0o" path="res://menu.gd" id="3_2w3kn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://dhl8xs0qa87gi" path="res://scripts/gui/critter_spawn.gd" id="3_151t0"]
 [ext_resource type="Script" uid="uid://1py08i846qhw" path="res://terrarium_camera.gd" id="3_dygky"]
 [ext_resource type="PackedScene" uid="uid://blnfiruyo4s28" path="res://addons/grid_display/grid_display_scene.tscn" id="4_5q3ku"]
+[ext_resource type="FontFile" uid="uid://ds4a625hdrga6" path="res://graphics/Fonts/Xolonium-Regular.ttf" id="4_8m472"]
 [ext_resource type="Script" uid="uid://c4ovauup3h7fw" path="res://player_control.gd" id="5_4gnlo"]
 [ext_resource type="Script" uid="uid://d38isihu1d5ii" path="res://scripts/gui/critter_amount.gd" id="5_ebrw0"]
 [ext_resource type="Texture2D" uid="uid://dwsmaejfbq8hy" path="res://graphics/[64x64] Dungeon Bricks Plain.png" id="5_kh8p4"]
@@ -95,77 +96,84 @@ zoom = Vector2(0.75, 0.75)
 script = ExtResource("3_dygky")
 
 [node name="menu" type="HBoxContainer" parent="terrarium_camera"]
+modulate = Color(0.717647, 1, 1, 1)
+z_index = 10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -724.335
-offset_top = 511.661
-offset_right = 751.665
-offset_bottom = 852.661
+offset_left = -724.0
+offset_top = 486.0
+offset_right = 752.0
+offset_bottom = 878.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.757, 1.105)
+pivot_offset = Vector2(724.335, 3.00964)
 alignment = 1
 script = ExtResource("3_2w3kn")
 metadata/_edit_group_ = true
 
 [node name="TabContainer" type="TabContainer" parent="terrarium_camera/menu"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_8m472")
 tab_alignment = 1
 current_tab = 0
 clip_tabs = false
 
-[node name="debug" type="HBoxContainer" parent="terrarium_camera/menu/TabContainer"]
+[node name="Debug" type="HBoxContainer" parent="terrarium_camera/menu/TabContainer"]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="terrarium_camera/menu/TabContainer/debug"]
+[node name="VBoxContainer" type="VBoxContainer" parent="terrarium_camera/menu/TabContainer/Debug"]
 layout_mode = 2
 
-[node name="critter_spawn" type="Button" parent="terrarium_camera/menu/TabContainer/debug/VBoxContainer"]
+[node name="critter_spawn" type="Button" parent="terrarium_camera/menu/TabContainer/Debug/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "spawn critter"
+theme_override_fonts/font = ExtResource("4_8m472")
+text = "Spawn Critter"
 script = ExtResource("3_151t0")
 
-[node name="critter_amount" type="HScrollBar" parent="terrarium_camera/menu/TabContainer/debug/VBoxContainer"]
+[node name="critter_amount" type="HScrollBar" parent="terrarium_camera/menu/TabContainer/Debug/VBoxContainer"]
 layout_mode = 2
 min_value = 1.0
 max_value = 10.0
 step = 1.0
 value = 1.0
+rounded = true
 script = ExtResource("5_ebrw0")
 
-[node name="critter_amount_display" type="Label" parent="terrarium_camera/menu/TabContainer/debug/VBoxContainer"]
+[node name="critter_amount_display" type="Label" parent="terrarium_camera/menu/TabContainer/Debug/VBoxContainer"]
 layout_mode = 2
 text = "1"
 horizontal_alignment = 1
 script = ExtResource("3_4gnlo")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="terrarium_camera/menu/TabContainer/debug"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="terrarium_camera/menu/TabContainer/Debug"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="terrarium_camera/menu/TabContainer/debug"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "spawn critter"
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="terrarium_camera/menu/TabContainer/debug"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="terrarium_camera/menu/TabContainer/debug/VBoxContainer3"]
+[node name="Button" type="Button" parent="terrarium_camera/menu/TabContainer/Debug"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "spawn critter"
 
-[node name="debug2" type="HBoxContainer" parent="terrarium_camera/menu/TabContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="terrarium_camera/menu/TabContainer/Debug"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="terrarium_camera/menu/TabContainer/Debug/VBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "spawn critter"
+
+[node name="Debug2" type="HBoxContainer" parent="terrarium_camera/menu/TabContainer"]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Button" type="Button" parent="terrarium_camera/menu/TabContainer/debug2"]
+[node name="Button" type="Button" parent="terrarium_camera/menu/TabContainer/Debug2"]
 layout_mode = 2
 size_flags_vertical = 0
 
@@ -192,6 +200,6 @@ offset_right = 141.0
 offset_bottom = 70.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_5q3ku")
 
-[connection signal="pressed" from="terrarium_camera/menu/TabContainer/debug/VBoxContainer/critter_spawn" to="terrarium_camera/menu" method="_on_critter_spawn_pressed"]
-[connection signal="value_changed" from="terrarium_camera/menu/TabContainer/debug/VBoxContainer/critter_amount" to="terrarium_camera/menu/TabContainer/debug/VBoxContainer/critter_amount" method="_on_value_changed"]
-[connection signal="value_changed" from="terrarium_camera/menu/TabContainer/debug/VBoxContainer/critter_amount" to="terrarium_camera/menu/TabContainer/debug/VBoxContainer/critter_amount_display" method="_on_critter_amount_value_changed"]
+[connection signal="pressed" from="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_spawn" to="terrarium_camera/menu" method="_on_critter_spawn_pressed"]
+[connection signal="value_changed" from="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_amount" to="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_amount" method="_on_value_changed"]
+[connection signal="value_changed" from="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_amount" to="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_amount_display" method="_on_critter_amount_value_changed"]

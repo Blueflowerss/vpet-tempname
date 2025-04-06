@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cooxdgdg2oy4v" path="res://critter_animated_sprite_2d.gd" id="3_l11x4"]
 [ext_resource type="PackedScene" uid="uid://bfsskvswlqiyv" path="res://state_nodes/critter_think.tscn" id="5_lr5tc"]
 [ext_resource type="Script" uid="uid://qvcoj48bc02n" path="res://animation_player.gd" id="5_nvc7m"]
-[ext_resource type="Script" uid="uid://c28eybcfw4ed" path="res://selection_circle.gd" id="6_6rewe"]
+[ext_resource type="Script" path="res://selection_circle.gd" id="6_6rewe"]
 [ext_resource type="PackedScene" uid="uid://cxq08o57jhypo" path="res://state_nodes/critter_wander.tscn" id="6_nvc7m"]
 [ext_resource type="PackedScene" uid="uid://ctapy88li8jb2" path="res://state_nodes/critter_move.tscn" id="7_6rewe"]
 [ext_resource type="Texture2D" uid="uid://ia8iqdk4rwev" path="res://graphics/circle.png" id="8_nvc7m"]
