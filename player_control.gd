@@ -6,7 +6,7 @@ func _ready() -> void:
 	current_terrarium = get_parent();
 func _physics_process(delta: float) -> void:
 	pass
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 		if event is InputEventMouseButton:
 			match event.button_index:
 				MOUSE_BUTTON_LEFT:
