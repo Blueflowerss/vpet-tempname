@@ -134,6 +134,7 @@ min_value = 1.0
 max_value = 10.0
 step = 1.0
 value = 1.0
+rounded = true
 script = ExtResource("5_ebrw0")
 
 [node name="critter_amount_display" type="Label" parent="terrarium_camera/menu/TabContainer/debug/VBoxContainer"]
