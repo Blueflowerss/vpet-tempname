@@ -13,6 +13,7 @@ var selection_rect : Panel;
 func _ready() -> void:
 	tilemap = $TileMapLayer;
 	selection_rect = $selection_rect;
+	Global.current_terrarium = self;
 	entity_layer = {};
 	astar_grid.region = Rect2i(Vector2i.ZERO,grid_size);
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES;
