@@ -40,8 +40,8 @@ func set_state(state: BaseState.ACT) -> void:
 func _ready() -> void:
 	current_terrarium = get_parent();
 	ref_sheet = ref_sheet_class.new();
-	grid_position = Vector2i(0,0);
 	move_to_position = grid_position;
+	set_sprite_pos_to_grid();
 	#group states by their type, used for behaviour randomization
 	for state : Node in assigned_states.values():
 		if !states_by_type.has(state.state_type):
@@ -54,6 +54,9 @@ func _physics_process(delta: float) -> void:
 	var next_position : Vector2 = Vector2((grid_position * 64) + Vector2i(32,32));
 	#var distance_to_next_tile : float = next_position.distance_to(position);
 	position = position.move_toward(next_position,1*ref_sheet.MOVE_SPEED);
+func set_sprite_pos_to_grid() -> void:
+	var sprite_position : Vector2 = Vector2((grid_position * 64) + Vector2i(32,32));
+	position = sprite_position;
 func _process(delta: float) -> void:
 	#a kinda timer so the AI doesn't freak out
 	pass

@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://nqq0p7tdi4y5"]
+[gd_scene load_steps=3 format=3 uid="uid://nqq0p7tdi4y5"]
 
 [ext_resource type="PackedScene" uid="uid://cta1bd11q6cjx" path="res://terrariumScene.tscn" id="1_pq8q7"]
+[ext_resource type="PackedScene" uid="uid://cktxrpaheepa7" path="res://player_control.tscn" id="2_pyidc"]
 
 [node name="root" type="Node"]
 
 [node name="terrarium" parent="." instance=ExtResource("1_pq8q7")]
+
+[node name="player_control" parent="." instance=ExtResource("2_pyidc")]

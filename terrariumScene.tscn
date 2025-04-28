@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cta1bd11q6cjx"]
+[gd_scene load_steps=12 format=4 uid="uid://cta1bd11q6cjx"]
 
 [ext_resource type="Script" uid="uid://cp0gutj6ktv0i" path="res://terrarium_scene.gd" id="1_8xau6"]
 [ext_resource type="Script" uid="uid://4oydw30fmf0o" path="res://menu.gd" id="3_2w3kn"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://1py08i846qhw" path="res://terrarium_camera.gd" id="3_dygky"]
 [ext_resource type="PackedScene" uid="uid://blnfiruyo4s28" path="res://addons/grid_display/grid_display_scene.tscn" id="4_5q3ku"]
 [ext_resource type="FontFile" uid="uid://ds4a625hdrga6" path="res://graphics/Fonts/Xolonium-Regular.ttf" id="4_8m472"]
-[ext_resource type="Script" uid="uid://c4ovauup3h7fw" path="res://player_control.gd" id="5_4gnlo"]
 [ext_resource type="Script" uid="uid://d38isihu1d5ii" path="res://scripts/gui/critter_amount.gd" id="5_ebrw0"]
 [ext_resource type="Texture2D" uid="uid://dwsmaejfbq8hy" path="res://graphics/[64x64] Dungeon Bricks Plain.png" id="5_kh8p4"]
 
@@ -77,14 +76,6 @@ tile_size = Vector2i(64, 64)
 custom_data_layer_0/name = "blocking_path"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_4gnlo")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5q3ku"]
-bg_color = Color(0.254902, 0.607843, 1, 0.133333)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0, 0, 0, 1)
 
 [node name="terrarium" type="Node2D"]
 script = ExtResource("1_8xau6")
@@ -189,16 +180,6 @@ z_index = -1
 tile_map_data = PackedByteArray("AAAEAAIAAAABAAIAAAAEAAQAAAABAAIAAAAEAAUAAAABAAIAAAAEAAYAAAABAAIAAAAFAAIAAAABAAIAAAAGAAIAAAABAAIAAAAGAAMAAAABAAIAAAAGAAQAAAABAAIAAAAGAAUAAAABAAIAAAAGAAYAAAABAAIAAAAHAAIAAAABAAIAAAAEAAcAAAABAAIAAAAEAAkAAAABAAIAAAAFAAkAAAABAAIAAAAGAAkAAAABAAIAAAAHAAkAAAABAAIAAAAHAAoAAAABAAIAAAAGAAoAAAABAAIAAAAFAAoAAAABAAIAAAAEAAoAAAABAAIAAAAEAAgAAAABAAEAAAAFAAgAAAABAAEAAAAGAAgAAAABAAEAAAAHAAgAAAABAAEAAAAIAAgAAAABAAEAAAAJAAgAAAABAAEAAAAKAAgAAAABAAEAAAAKAAcAAAABAAEAAAAKAAUAAAABAAEAAAAKAAQAAAABAAEAAAAKAAMAAAABAAEAAAAKAAIAAAABAAEAAAAJAAIAAAABAAEAAAAIAAIAAAABAAEAAAAIAAQAAAABAAEAAAAIAAUAAAABAAEAAAAIAAYAAAABAAEAAAAIAAcAAAABAAEAAAAJAAcAAAABAAEAAAALAAIAAAABAAEAAAAMAAIAAAABAAEAAAANAAIAAAABAAEAAAAOAAIAAAABAAEAAAAPAAIAAAABAAEAAAAQAAIAAAABAAEAAAARAAIAAAABAAEAAAASAAIAAAABAAEAAAATAAIAAAABAAEAAAAUAAIAAAABAAEAAAAVAAIAAAABAAEAAAAVAAMAAAABAAEAAAAVAAQAAAABAAEAAAAVAAUAAAABAAEAAAAVAAYAAAABAAEAAAAVAAcAAAABAAEAAAAUAAcAAAABAAEAAAATAAcAAAABAAEAAAASAAcAAAABAAEAAAARAAcAAAABAAEAAAAQAAcAAAABAAEAAAAPAAcAAAABAAEAAAAOAAcAAAABAAEAAAANAAcAAAABAAEAAAAMAAcAAAABAAEAAAALAAcAAAABAAEAAAAFAAcAAAABAAEAAAAHAAMAAAABAAEAAAAJAAYAAAABAAEAAAA=")
 tile_set = SubResource("TileSet_151t0")
 metadata/_edit_lock_ = true
-
-[node name="player_control" type="Node2D" parent="."]
-script = ExtResource("5_4gnlo")
-
-[node name="selection_rect" type="Panel" parent="player_control"]
-visible = false
-offset_left = 7.0
-offset_right = 141.0
-offset_bottom = 70.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_5q3ku")
 
 [connection signal="pressed" from="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_spawn" to="terrarium_camera/menu" method="_on_critter_spawn_pressed"]
 [connection signal="value_changed" from="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_amount" to="terrarium_camera/menu/TabContainer/Debug/VBoxContainer/critter_amount" method="_on_value_changed"]

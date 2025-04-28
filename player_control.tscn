@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cktxrpaheepa7"]
+
+[ext_resource type="Script" uid="uid://c4ovauup3h7fw" path="res://player_control.gd" id="1_1allp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5q3ku"]
+bg_color = Color(0.254902, 0.607843, 1, 0.133333)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="player_control" type="Node2D"]
+script = ExtResource("1_1allp")
+
+[node name="selection_rect" type="Panel" parent="."]
+visible = false
+offset_left = 7.0
+offset_right = 141.0
+offset_bottom = 70.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5q3ku")

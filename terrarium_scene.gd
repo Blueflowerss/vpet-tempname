@@ -20,10 +20,11 @@ func _ready() -> void:
 	astar_grid.update();
 	$GridDisplayScene.grid_size = grid_size;
 	$GridDisplayScene.cell_size = grid_cell_size;
-	spawn_critters(1);
+	spawn_critters(1, Vector2i.ZERO);
 	refresh_terrain_grid();
 	refresh_entity_map();
-
+func whatever() -> void:
+	pass
 
 func pathfind_conditional(from : Vector2i, to : Vector2i, impassable : Array[String]) -> Array[Vector2i]:
 	astar_grid.fill_solid_region(astar_grid.region,false);
@@ -52,9 +53,11 @@ func get_units_in_rect(first_pos : Vector2i, second_pos : Vector2i) -> Array[Nod
 			units.append_array(entity_layer[entity_array_pos]);
 	return units;
 	#print("\n");
-func spawn_critters(amount : int) -> void:
+func spawn_critters(amount : int, grid_position : Vector2i) -> void:
 	for i : int in range(0,amount):
 		var critterNode : Critter = critter_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED);
+		critterNode.grid_position = grid_position;
+		critterNode.last_position = grid_position;
 		critterNode.connect("has_moved",refresh_entity_map);
 		add_child(critterNode);
 func refresh_terrain_grid() -> void:
